@@ -16,6 +16,13 @@ const webpackConfig = merge(baseWebpackConfig, {
           MiniCssExtractPlugin.loader,
           "css-loader",
           "postcss-loader",
+          {
+            loader: "px2rem-loader",
+            options: {
+              remUnit: 75,
+              remPrecision: 8,
+            },
+          },
           "sass-loader",
         ],
       },
@@ -29,7 +36,7 @@ const webpackConfig = merge(baseWebpackConfig, {
       context: __dirname,
       manifest: require("./dll/manifest.json"),
     }),
-    new BundleAnalyzerPlugin(),
+    // new BundleAnalyzerPlugin(),
   ],
   optimization: {
     minimizer: [new CssMinimizerPlugin()],
