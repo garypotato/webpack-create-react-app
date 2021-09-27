@@ -11,39 +11,51 @@ module.exports = {
     path: path.join(__dirname, "../dist"),
     filename: "[name]_[chunkhash:8].js",
   },
+  resolve: {
+    extensions: [".wasm", ".mjs", ".js", ".json", ".jsx"],
+    alias: {
+      React: path.join(__dirname, "../node_modules/react/index.js"),
+      ReactDOM: path.join(__dirname, "../node_modules/react-dom/index.js"),
+    },
+  },
   module: {
+    // ? jquery doesn't need parse
+    noParse: /node_modules\/(jquery\.js)/,
     rules: [
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
-        use: {
-          loader: "babel-loader",
-          options: {
-            presets: [
-              require.resolve("@babel/preset-react"),
-              [
-                require.resolve("@babel/preset-env"),
-                {
-                  corejs: 3,
-                  modules: false,
-                  useBuiltIns: "usage",
-                },
+        use: [
+          "thread-loader",
+          {
+            loader: "babel-loader",
+            options: {
+              presets: [
+                require.resolve("@babel/preset-react"),
+                [
+                  require.resolve("@babel/preset-env"),
+                  {
+                    corejs: 3,
+                    modules: false,
+                    useBuiltIns: "usage",
+                  },
+                ],
               ],
-            ],
-            plugins: [
-              [
-                "@babel/plugin-transform-runtime",
-                {
-                  corejs: false,
-                  helpers: true,
-                  regenerator: false,
-                  useESModules: true,
-                },
+              plugins: [
+                [
+                  "@babel/plugin-transform-runtime",
+                  {
+                    corejs: false,
+                    helpers: true,
+                    regenerator: false,
+                    useESModules: true,
+                  },
+                ],
               ],
-            ],
-            cacheDirectory: true,
+              cacheDirectory: true,
+            },
           },
-        },
+        ],
       },
       {
         test: /.(png|jpg|gif|jpeg)$/,
@@ -80,6 +92,7 @@ module.exports = {
     minimize: true,
     minimizer: [
       new TerserPlugin({
+        parallel: true,
         extractComments: false,
       }),
     ],

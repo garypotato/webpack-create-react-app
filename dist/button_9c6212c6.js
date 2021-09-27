@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkwebpack_react=self.webpackChunkwebpack_react||[]).push([[841],{3978:function(t,e,n){var a=n(4275);e.Z=function(){return a.createElement("button",{type:"button"},"I am a button")}}}]);
