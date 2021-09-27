@@ -1,5 +1,4 @@
 const webpack = require("webpack");
-const vendors = ["react", "react-dom"];
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const path = require("path");
 
