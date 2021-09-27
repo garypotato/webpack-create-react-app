@@ -1,5 +1,5 @@
 # webpack-create-react-app
-I used Create-React-App a lot, until one day I am wondering why I can't make a similar one that fits me. `webpack` as the most popular bundler, it not only helps me to understand more about 'create-react-app', but also helps me to do more like responsvie website design.
+I am simulating `create-react-app` in here. I customize some features that fits me. I probably will stop using `create-react-app` in my future.
 
 ## webpack enviornment
 By using 'webpack-merge`, I devided the webpack.config file to 4 parts: 
